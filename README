@@ -1,0 +1,4 @@
+h1. Forminator
+h2. Simple form generator and server
+
+Forminator was built to run on Heroku because I didn't want to pay for Wufoo.
