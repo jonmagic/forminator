@@ -1,0 +1,46 @@
+#user_nav {position:relative;height:1.6em;margin:-1px 0 1em 0;background-color:#eee;border:1px solid #ccc;padding:1em;-moz-border-radius-bottomleft:10px;-webkit-border-bottom-left-radius:10px;-moz-border-radius-bottomright:10px;-webkit-border-bottom-right-radius:10px;}
+#user_nav form {position:absolute;top:0.8em;right:1em;}
+#user_nav fieldset.buttons {position:absolute;top:1em;right:0.6em;}
+#content {}
+ul.forms, ul.questions {position:relative;margin:0;padding:0;list-style:none;}
+ul.forms li, ul.questions li {position:relative;margin-bottom:0.4em;}
+ul.forms li > a, ul.questions li > a {display:block;padding:0.8em 1em;border:1px solid #ccc;background-color:#eee;-moz-border-radius:10px;-webkit-border-radius:10px;text-decoration:none;font-weight:bold;}
+ul.forms li > a:hover, ul.questions li > a:hover {color:#000;background-color:#ccc;}
+ul.questions li > a {height:5em;}
+ul.questions li > span.question_type {position:absolute;left:1em;bottom:0.8em;}
+ul.questions li > span.question_options {position:absolute;right:1em;bottom:0.8em;}
+#sidebar {text-align:center;background-color:#000;}
+.float_right {float:right;}
+.ui-widget > div {padding:0 1em;}
+.ui-widget > div > p {margin:1em 0;display:block;}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid #CF0000;
+  padding: 0px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+ 
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: 0px;
+  background-color: #c00;
+  color: #fff;
+}
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 8px;
+}
+#errorExplanation ul {
+  margin: 2px 24px;
+}
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: disc;
+}

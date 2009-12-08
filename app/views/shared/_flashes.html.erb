@@ -1,0 +1,10 @@
+<%- flash.each do |name, msg| -%>
+  <div class="ui-widget" id="flash_<%= name %>">
+    <div class="ui-corner-all <%= name == :notice || name == :success ? 'ui-state-highlight' : 'ui-state-error' %>">
+      <p>
+        <span class='ui-icon <%= name == :notice || name == :success ? 'ui-icon-info' : 'ui-icon-alert' %>' style="float:left;margin-right:0.3em"></span><strong><%= msg %></strong>
+      </p>
+    </div>
+  </div>
+<%- end -%>
+

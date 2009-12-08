@@ -1,0 +1,9 @@
+<h2>My Forms</h2>
+
+<ul class="forms">
+  <% for form in @forms %>
+    <li><%= link_to h(form.name), form %></li>
+  <% end %>
+</ul>
+
+<p><%= link_to "New Form", new_form_path %></p>

@@ -1,0 +1,16 @@
+<% if signed_in? %>
+  <div id="user_nav">
+    You are signed in. <%= link_to "Sign Out", sign_out_path %>
+  </div>
+<% elsif user_or_session_page? %>
+  <div id="user_nav">
+    <% form_for :session, :url => session_path do |form| %>
+        <%= form.text_field :email %>
+        <%= form.password_field :password %>
+        <%= form.submit "Sign in" %>
+    <% end %>
+  </div>
+<% else %>
+  <div style="margin-top:2em">
+  </div>
+<% end %>

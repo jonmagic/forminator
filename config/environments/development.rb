@@ -16,6 +16,10 @@ config.action_controller.perform_caching             = false
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
 
+# clearance config options
+HOST = "localhost"
+
+# mongomapper connection
 MongoMapper.connection = Mongo::Connection.new('127.0.0.1', 27017, :auto_reconnect => true, :logger => Rails.logger)
 MongoMapper.database = "forminator-#{Rails.env}"
 MongoMapper.ensure_indexes!

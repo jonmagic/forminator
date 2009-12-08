@@ -1,0 +1,19 @@
+<h2><%=h @form.name %></h2>
+
+<ul class="questions">
+  <% @form.questions.each do |question| %>
+    <li class="questions">
+      <a href="javascript:void(0)">
+        <span class="question_text"><%= question.text %></span>
+      </a>
+      <span class="question_type">Type: <%= question.type %></span>
+      <span class="question_options">Options: <%= options_helper(question) %></span>
+    </li>
+  <% end %>
+</ul>
+
+<p class="">
+  <%= link_to "Edit this form", edit_form_path(@form) %> |
+  <%= link_to "Delete this form", @form, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View all forms", forms_path %>
+</p>

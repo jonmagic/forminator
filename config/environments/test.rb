@@ -27,12 +27,17 @@ config.action_mailer.delivery_method = :test
 # like if you have constraints or database-specific column types
 # config.active_record.schema_format = :sql
 
+# clearance config options
+HOST = "localhost"
+
+# mongomapper connection
 MongoMapper.connection = Mongo::Connection.new('127.0.0.1', 27017, :auto_reconnect => true, :logger => Rails.logger)
 MongoMapper.database = "forminator-#{Rails.env}"
 MongoMapper.ensure_indexes!
 
-config.gem "rspec", :lib => false, :version => ">=1.2.8"
-config.gem "rspec-rails", :lib => false, :version => ">=1.2.7.1"
-config.gem "webrat", :lib => false, :version => ">=0.5.3"
-config.gem "cucumber", :lib => false, :version => ">=0.3.1"
+# test gems
+config.gem 'cucumber',    :lib => false,        :version => '>=0.4.4' unless File.directory?(File.join(Rails.root, 'vendor/plugins/cucumber'))
+config.gem 'webrat',      :lib => false,        :version => '>=0.5.3' unless File.directory?(File.join(Rails.root, 'vendor/plugins/webrat'))
+config.gem 'rspec',       :lib => false,        :version => '>=1.2.9' unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec'))
+config.gem 'rspec-rails', :lib => false,        :version => '>=1.2.9' unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec-rails'))
 config.gem "thoughtbot-factory_girl", :lib => "factory_girl", :source => "http://gems.github.com"

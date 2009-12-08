@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>Forminator</title>
+    <%= stylesheet_link_tag "formtastic", "blueprint/screen", "flick/jquery-ui-1.7.2.custom.css", "base" %>
+    <%= stylesheet_link_tag 'blueprint/print', :media => 'print' %>
+    <%= "<!--[if IE]>#{stylesheet_link_tag 'blueprint/ie', :media => 'screen'}<![endif]-->" %>
+    <%= javascript_include_tag "jquery-1.3.2.min.js", "jquery-ui-1.7.2.custom.min.js", "application" %>
+  </head>
+  <body>
+    <div class="container">
+      <%= render :partial => 'shared/user_panel' %>
+      <div id="content" class="span-12">
+        <%= render :partial => 'shared/flashes' %>
+        <%= yield %>
+      </div>
+      <div id="sidebar" class="span-12 last">
+        <object width="400" height="300"><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=4765490&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=00ADEF&amp;fullscreen=1" /><embed src="http://vimeo.com/moogaloop.swf?clip_id=4765490&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=00ADEF&amp;fullscreen=1" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="400" height="300"></embed></object>
+      </div>
+    </div>
+  </body>
+</html>

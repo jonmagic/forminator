@@ -35,4 +35,15 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  
+  def setup
+    clear_all_collections
+  end
+
+  def clear_all_collections
+    Dir[Rails.root + 'app/models/**/*.rb'].each do |model_path|
+      klass = File.basename(model_path, '.rb').classify.constantize
+      klass.collection.remove if klass.respond_to?(:collection)
+    end
+  end
 end
