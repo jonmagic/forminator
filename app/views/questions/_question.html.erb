@@ -1,6 +1,6 @@
-<li>
+<li id="question_<%= @question.id %>">
   <a href="javascript:void(0)" class="question ui-state-default ui-corner-all" data-question-id="<%= @question.id %>">
-    <span class="ui-icon ui-icon-help float-left"></span>
+    <%= question_icon_helper(question) %>
     <%= @question.text %>
   </a>
 </li>

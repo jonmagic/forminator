@@ -27,18 +27,24 @@ class QuestionsController < ApplicationController
     @form = Form.find(params[:form_id])
     @question = @form.questions.find(params[:id])
     if @question.update_attributes(params[:question])
-      render :nothing => true, :response => 200
+      render :partial => 'question', :response => 200
     else
       render :nothing => true, :response => 500
     end
   end
   
   def destroy
-    
+    @form = Form.find(params[:form_id])
+    @form.questions.delete_if {|q| q.id.to_s == params[:id] }
+    if @form.save
+      render :nothing => true, :response => 200
+    else
+      render :nothing => true, :response => 500
+    end
   end
   
   private
     def types
-      @types = [["Title","title"],["SubTitle","subtitle"],["Divider","divider"],["Text Field","text"],["Text Box","paragraph"],["Multiple Choice","multiple_choice"],["Checkboxes","checkboxes"],["Drop Down List","list"],["If Then","ifthen"]]      
+      @types = [["Title","title"],["SubTitle","subtitle"],["Divider","divider"],["Short Answer","text"],["Long Answer","paragraph"],["Multiple Choice","multiple_choice"],["Checkboxes","checkboxes"],["Drop Down List","list"],["If Then","ifthen"]]      
     end
 end

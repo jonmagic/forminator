@@ -1,6 +1,9 @@
 /* common */
 .float-right {float:right;}
 .float-left {float:left;}
+a {color:#0073ea;text-decoration:none;}
+a:hover {color:#0073ea;text-decoration:underline;}
+h2 {color:#666666;}
 
 /* usernav */
 #user_nav {position:relative;height:1.6em;margin:-1px 0 1em 0;background-color:#eee;border:1px solid #ccc;padding:1em;-moz-border-radius-bottomleft:10px;-webkit-border-bottom-left-radius:10px;-moz-border-radius-bottomright:10px;-webkit-border-bottom-right-radius:10px;}
@@ -9,21 +12,24 @@
 
 /* content */
 #content {}
+h2 input {font-size:18px;}
 
 /* sidebar */
-#sidebar {text-align:center;background-color:#000;}
 
 /* lists */
 .jm-list {position:relative;margin:0;padding:0;list-style:none;}
 .jm-list li {position:relative;margin-bottom:0.4em;}
 .jm-list span.ui-icon {margin-right:6px}
-.jm-list li > a {display:block;padding:0.5em;text-decoration:none;}
+.jm-list li > a {display:block;padding:0.5em;text-decoration:none;height:18px;}
 .jm-list li > a:hover {color:#fff;}
 .jm-buttons {margin:0;padding:0;list-style:none;display:inline;}
-.jm-buttons li {margin-right:4px;padding:4px 0;width:26px;float:left;}
+.jm-buttons li {margin-right:4px;padding:4px 0;width:26px;float:left;cursor:pointer;}
 .jm-buttons li > span {margin:0 5px;}
 .ui-widget > div {padding:0 1em;}
 .ui-widget > div > p {margin:1em 0;display:block;}
+
+/* dialog form */
+
 
 /* error explanation */
 #errorExplanation {width: 400px;border: 2px solid #CF0000;padding: 0px;padding-bottom: 12px;margin-bottom: 20px;background-color: #f0f0f0;}

@@ -1,20 +1,24 @@
-<% semantic_form_for([@form, @question]) do |form| %>
-  <%= form.error_messages %>
-  <% form.inputs do %>
-    <%= form.input :text %>
-    <%= form.input :instructions %>
-    <%= form.input :type, :collection => @types, :include_blank => false %>
-    <ul class="options">
-      <% @question.options.each do |option| %>
-        <li>
-          <label for="question_option">Option</label>
-          <input name="question[options][]" type="text" class="float-left" value="<%= option %>" />
-          <span class="ui-icon ui-icon-plus float-left"></span>
-          <span class="ui-icon ui-icon-minus float-left"></span>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
+<% form_for [@form, @question], :html => {:class => 'pretty_form'} do |form| %>
+  <%= form.label :text, 'Question<span class="small">Enter your question or title</span>' %><%= form.text_field :text %>
+  <div class="spacer"></div>
+  <%= form.label :instructions, 'Instructions<span class="small">Enter any instructions</span>' %><%= form.text_field :instructions %>
+  <div class="spacer"></div>
+  <%= form.label :required, 'Required<span class="small">Is this a required question?</span>' %>
+  <div class="option"><%= form.check_box :required %></div>
+  <div class="spacer"></div>
+  <%= form.label :type %><%= form.select :type, @types, :include_blank => false %>
+  <div class="spacer"></div>
+  <div class="options">
+    <% @question.options.each do |option| %>
+      <div>
+        <label for="question_option">Option</label>
+        <input name="question[options][]" type="text" class="float-left" value="<%= option %>" />
+        <span class="ui-icon ui-icon-plus float-left"></span>
+        <span class="ui-icon ui-icon-minus float-left"></span>
+      </div>
+      <div class="spacer"></div>
+    <% end %>
+  </div>
 <% end %>
 
 <script>
@@ -22,19 +26,20 @@
     // focus on question
     $("#question_text").focus();
     // new question
-    $('#dialog').dialog('option', 'title', 'New Question');
+    $('#dialog').dialog('option', 'title', 'Edit Question');
+    $('#dialog').dialog('option', 'height', 380);
     $('#dialog').dialog('option', 'buttons', {
       "Save": function(){
         $("#dialog form").ajaxSubmit({
           beforeSubmit: function(data, jqForm, options){
-            $('fieldset.inputs').each(function(){
+            $('div.options inputs').each(function(){
               if($(this).val()==""){
                 $(this).parent().remove();
               }
             });
           },
           success: function(data, status){
-            $("#questions").append(data);
+            $("#question_<%= @question.id %>").replaceWith(data);
             $("#dialog").dialog('close');
             render();
           },
@@ -44,40 +49,33 @@
       "Cancel": function(){
         $("#dialog form").clearForm();
         $("#dialog").dialog('close');
+      },
+      "Delete": function(){
+        if(confirm("Are you sure you want to delete this Post?")){
+          $.ajax({
+              url: '<%= form_question_path(@form, @question) %>',
+              type: 'post',
+              dataType: 'script',
+              data: { '_method': 'delete' },
+              success: function() {
+                $("#dialog").dialog('close');
+                $("#question_<%= @question.id %>").remove();
+                render();
+              }
+          });
+        }
       }
     });
-    // form stuff
     // form stuff
     $("#question_type").change(function(){
-      if (_.include(["multiple_choice","checkboxes","list","ifthen"], $("#question_type").val())) {
-        $('ul.options li').remove();
-        $('#question_text_input').show();
-        $('#question_instructions_input').show();
-        $('fieldset.inputs ol').append('<li class="new"><label for="question_option">Option</label><input name="question[options][]" type="text" class="float-left" /><span class="ui-icon ui-icon-plus float-left"></span></li>');
-        $('fieldset.inputs ol li input.first').focus();
-      }else if(_.include(["text","paragraph"], $("#question_type").val())){
-        $('#question_text_input').show();
-        $('#question_instructions_input').show();
-        $('ul.options li').remove();
-      }else if(_.include(["title","subtitle"], $("#question_type").val())){
-        $('#question_text_input').show();
-        $('#question_instructions_input').hide();
-        $('ul.options li').remove();
-      }else if(_.include(["divider"], $("#question_type").val())){
-        $('#question_text_input').hide();
-        $('#question_instructions_input').hide();
-        $('ul.options li').remove();
-      }else{
-        $('#question_instructions_input').show();
-        $('ul.options li').remove();
-      }
+      show_correct_form_fields();
     });
-    $('span.ui-icon-plus').live("click", function(){
-      $(this).parent().after('<li class="new"><label for="question_option">Option</label><input name="question[options][]" type="text" class="float-left" /><span class="ui-icon ui-icon-plus float-left"></span><span class="ui-icon ui-icon-minus float-left"></span></li>');
+    $('form span.ui-icon-plus').live("click", function(){
+      $(this).parent().after('<div class="new"><label for="question_option">Option</label><input name="question[options][]" type="text" class="float-left" /><span class="ui-icon ui-icon-plus float-left"></span><span class="ui-icon ui-icon-minus float-left"></span></div>');
     });
-    $('span.ui-icon-minus').live("click", function(){
+    $('form span.ui-icon-minus').live("click", function(){
       $(this).parent().remove();
     });
-    if(_.include(["title","subtitle"], $("#question_type").val())){$('#question_instructions_input').hide();}
+    show_correct_form_fields();
   });
 </script>

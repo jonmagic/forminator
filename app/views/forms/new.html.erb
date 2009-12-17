@@ -1,8 +1,7 @@
-<% semantic_form_for @form do |form| %>
-  <%= form.error_messages %>
-  <% form.inputs do %>
-    <%= form.input :name %>
-  <% end %>
+<% form_for @form, :html => {:class => 'pretty_form'} do |form| %>
+  <%= form.label :text, 'Name<span class="small">Enter a name for your form</span>' %>
+  <%= form.text_field :name %>
+  <div class="spacer"></div>
 <% end %>
 
 <script>

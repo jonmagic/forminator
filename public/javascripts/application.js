@@ -4,7 +4,7 @@ $(function(){
     autoOpen: false,
     modal: true,
     width: 500,
-    height: 300
+    height: 200
   });
   // list rollover
   $('.jm-list a, .jm-buttons li').live('mouseover', function(){
@@ -13,7 +13,55 @@ $(function(){
   $('.jm-list a, .jm-buttons li').live('mouseout', function(){
     $(this).removeClass('ui-state-hover')
   });
+  // hiljack the enter key
+  $('form').live('keydown', function(e){
+    if(e.keyCode == 13) {
+      $('button:contains("Save")').click()
+      return false;
+    }
+  });
 });
+
+function show_correct_form_fields(){
+  if (_.include(["multiple_choice","checkboxes","list","ifthen"], $("#question_type").val())) {
+    $('label[for="question_text"]').show();
+    $('input#question_text').show();
+    $('label[for="question_instructions"]').show();
+    $('input#question_instructions').show();
+    $('label[for="question_required"]').show();
+    $('input#question_required').show();
+    if($('div.options div').length==0){
+      $('div.options').append('<div class="new"><label for="question_option">Option</label><input name="question[options][]" type="text" class="float-left" /><span class="ui-icon ui-icon-plus float-left"></span></div><div class="spacer"></div>');  
+    }
+    $('div.options input.first').focus();
+  }else if(_.include(["text","paragraph"], $("#question_type").val())){
+    $('label[for="question_text"]').show();
+    $('input#question_text').show();
+    $('label[for="question_instructions"]').show();
+    $('input#question_instructions').show();
+    $('label[for="question_required"]').show();
+    $('input#question_required').show();
+    $('div.options').empty();
+  }else if(_.include(["title","subtitle"], $("#question_type").val())){
+    $('label[for="question_text"]').show();
+    $('input#question_text').show();
+    $('label[for="question_instructions"]').hide();
+    $('input#question_instructions').hide();
+    $('label[for="question_required"]').hide();
+    $('input#question_required').hide();
+    $('div.options').empty();
+  }else if(_.include(["divider"], $("#question_type").val())){
+    $('label[for="question_text"]').hide();
+    $('input#question_text').hide();
+    $('label[for="question_instructions"]').hide();
+    $('input#question_instructions').hide();
+    $('label[for="question_required"]').hide();
+    $('input#question_required').hide();
+    $('div.options').empty();
+  }else{
+    $('div.options').empty();
+  }
+}
 
 (function(){
 

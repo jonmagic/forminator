@@ -1,4 +1,4 @@
-<h2><%=h @form.name %></h2>
+<h2 class=""><%= link_to "My Forms", root_url %> > <span id="form_name"><%=h @form.name %></span></h2>
 <ul class="jm-buttons ui-widget ui-helper-clearfix">
   <li class="ui-state-default ui-corner-all" id="new_question">
     <span class="ui-icon ui-icon-plus"></span>
@@ -7,27 +7,17 @@
 <div style="clear:both;padding-bottom:1em"></div>
 <ul id="questions" class="questions jm-list ui-widget ui-helper-clearfix">
   <% @form.questions.sort_by(&:ordinal).each do |question| %>
-    <li>
+    <li id="question_<%= question.id %>">
       <a href="javascript:void(0)" class="question ui-state-default ui-corner-all" data-question-id="<%= question.id %>">
-        <span class="ui-icon ui-icon-help float-left"></span>
+        <%= question_icon_helper(question) %>
         <%= question.text %>
       </a>
-      <div class="question_details hide">
-        <p><%= question.type %></p>
-        <ul>
-          <% question.options.each do |option| %>
-            <li><%= option %></li>
-          <% end %>
-        </ul>
-      </div>
     </li>
   <% end %>
 </ul>
 
 <p class="">
-  <%= link_to "Edit this form", edit_form_path(@form) %> |
-  <%= link_to "Delete this form", @form, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View all forms", forms_path %>
+  <%= link_to "Delete this form", @form, :confirm => 'Are you sure?', :method => :delete %>
 </p>
 
 <div id="dialog"></div>
@@ -55,5 +45,18 @@
 
     // render the form
     render();
+    
+    // edit form properties
+    $('#form_name').editable("<%= form_path(@form) %>", {
+        name: 'form[name]',
+        method : "PUT",
+        submitdata: {
+          authenticity_token: <%= form_authenticity_token.to_json %>,
+          wants: 'name'
+        },
+        indicator : "<img src='/images/indicator.gif'>",
+        tooltip   : "Click to edit...",
+        style  : "inherit"
+    });
   });
 </script>

@@ -2,10 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <title>Forminator</title>
-    <%= stylesheet_link_tag "formtastic", "blueprint/screen", "flick/jquery-ui-1.7.2.custom.css", "base" %>
+    <%= stylesheet_link_tag "formtastic", "blueprint/screen", "flick/jquery-ui-1.7.2.custom.css", "base", "form" %>
     <%= stylesheet_link_tag 'blueprint/print', :media => 'print' %>
     <%= "<!--[if IE]>#{stylesheet_link_tag 'blueprint/ie', :media => 'screen'}<![endif]-->" %>
-    <%= javascript_include_tag "jquery-1.3.2.min.js", "jquery-ui-1.7.2.custom.min.js", "jquery.form.js", "underscore-min.js", "application" %>
+    <%= javascript_include_tag "jquery-1.3.2.min.js", 
+                               "jquery-ui-1.7.2.custom.min.js", 
+                               "jquery.form.js", 
+                               "underscore-min.js", 
+                               "jquery.jeditable.js", 
+                               "application.js" %>
   </head>
   <body>
     <div class="container">

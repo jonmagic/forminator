@@ -1,11 +1,15 @@
 class FormsController < ApplicationController
   before_filter :authenticate
   def index
-    @forms = Form.all(:creator_id => current_user.id)
+    @forms = Form.all(:creator_id => current_user.id).sort_by(&:name)
   end
   
   def show
     @form = Form.first(:id => params[:id], :creator_id => current_user.id)
+    respond_to do |format|
+      format.html # show.html.erb
+      format.js { render :json => @form.to_json }
+    end
   end
   
   def new
@@ -15,6 +19,7 @@ class FormsController < ApplicationController
   
   def create
     @form = Form.new(params[:form])
+    @form.questions << Question.new(:text => @form.name, :type => 'title', :ordinal => 1)
     if @form.save
       render :partial => 'form', :response => 200
     else
@@ -24,11 +29,9 @@ class FormsController < ApplicationController
   
   def update
     @form = Form.first(:id => params[:id], :creator_id => current_user.id)
-    if @form.update_attributes(params[:form])
-      flash[:notice] = "Successfully updated form."
-      redirect_to @form
-    else
-      render :action => 'edit'
+    @form.update_attributes(params[:form])
+    respond_to do |format|
+      format.js
     end
   end
   
