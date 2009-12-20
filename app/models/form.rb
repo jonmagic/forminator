@@ -5,6 +5,7 @@ class Form
   key :creator_id, Integer, :require => true
   key :created_at, Time, :require => true
   key :updated_at, Time
+  key :recipients, Array
   
   has_many :questions
   
@@ -25,6 +26,11 @@ class Form
   end
   def set_updated_at
     self.updated_at = Time.now
+  end
+  
+  before_update :recipients_to_array
+  def recipients_to_array
+    self.recipients = self.recipients.to_s.split(',')
   end
   
 end

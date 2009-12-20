@@ -32,6 +32,7 @@ class FormsController < ApplicationController
     @form.update_attributes(params[:form])
     respond_to do |format|
       format.js
+      format.html { render :nothing => true, :response => 200 }
     end
   end
   

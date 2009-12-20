@@ -14,7 +14,7 @@ $(function(){
     $(this).removeClass('ui-state-hover')
   });
   // hiljack the enter key
-  $('form').live('keydown', function(e){
+  $('form.pretty_form').live('keydown', function(e){
     if(e.keyCode == 13) {
       $('button:contains("Save")').click()
       return false;

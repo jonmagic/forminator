@@ -12,19 +12,19 @@ module RenderHelper
       html << "<hr />"
     when "text"
       html << "<label class='standard'>#{question.text}<span class='small'>#{question.instructions}#{required}</span></label>"
-      html << "<input type='text' id='question_#{question.id}' name='question[#{question.id}]' />"
+      html << "<input type='text' id='questions_#{question.id}' name='questions[#{question.id}]' class='#{"required" if question.required}' />"
     when "paragraph"
       html << "<label class='standard'>#{question.text}<span class='small'>#{question.instructions}#{required}</span></label>"
-      html << "<text type='text' id='question_#{question.id}' name='question[#{question.id}]'></text>"
+      html << "<text type='text' id='questions_#{question.id}' name='questions[#{question.id}]' class='#{"required" if question.required}'></text>"
     when "multiple_choice"
       html << "<label class='standard'>#{question.text}<span class='small'>#{question.instructions}#{required}</span></label>"
-      question.options.each { |option| html << "<div class='option'><input type='radio' id='question_#{question.id}' name='question[#{question.id}][#{option}]' /> <span>#{option}</span></div>" }
+      question.options.each { |option| html << "<div class='option'><input type='radio' id='questions_#{question.id}' name='questions[#{question.id}][#{option}]' class='#{"required" if question.required}' /> <span>#{option}</span></div>" }
     when "checkboxes"
       html << "<label class='standard'>#{question.text}<span class='small'>#{question.instructions}#{required}</span></label>"
-      question.options.each { |option| html << "<div class='option'><input type='checkbox' id='question_#{question.id}' name='question[#{question.id}][#{option}]' /> <span>#{option}</span></div>" }
+      question.options.each { |option| html << "<div class='option'><input type='checkbox' id='questions_#{question.id}' name='questions[#{question.id}][#{option}]' class='#{"required" if question.required}' /> <span>#{option}</span></div>" }
     when "list"
       html << "<label>#{question.text}<span class='small'>#{question.instructions}#{required}</span></label>"
-      html << "<select id='question_#{question.id}' name='question[#{question.id}]'>"
+      html << "<select id='questions_#{question.id}' name='questions[#{question.id}]' class='#{"required" if question.required}'>"
       question.options.each { |option| html << "<option value='#{option}'>#{option}</option>" }
       html << "</select>"
     when "ifthen"

@@ -1,4 +1,5 @@
-<form class="pretty_form" action="/render">
+<form class="pretty_form" action="/receiver/<%= @form.id %>" method="post">
+  <input type="hidden" name="_method" value="put" />
   <% @form.questions.each do |question| %>
     <%= question_to_html(question) %>
     <div class="spacer"></div>

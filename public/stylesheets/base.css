@@ -12,7 +12,13 @@ h2 {color:#666666;}
 
 /* content */
 #content {}
-h2 input {font-size:18px;}
+#content h2 input {font-size:18px;}
+
+/* form recipients */
+#recipients {margin:2em 0 1em 0;}
+#recipients h3 {font-size:24px;color:#666666;margin:4px 0;padding:0;}
+#recipients textarea {width:458px;height:50px;margin-top:0;}
+#recipients span {color:#666666;}
 
 /* sidebar */
 
@@ -27,9 +33,6 @@ h2 input {font-size:18px;}
 .jm-buttons li > span {margin:0 5px;}
 .ui-widget > div {padding:0 1em;}
 .ui-widget > div > p {margin:1em 0;display:block;}
-
-/* dialog form */
-
 
 /* error explanation */
 #errorExplanation {width: 400px;border: 2px solid #CF0000;padding: 0px;padding-bottom: 12px;margin-bottom: 20px;background-color: #f0f0f0;}

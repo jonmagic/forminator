@@ -3,6 +3,7 @@ ActionController::Routing::Routes.draw do |map|
     form.resources :questions
   end
   map.resources :render
+  map.resources :receiver
   
   map.root :controller => 'forms'
   

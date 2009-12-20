@@ -15,7 +15,14 @@
     </li>
   <% end %>
 </ul>
-
+<div id="recipients">
+  <h3>Recipients</h3>
+  <span>Enter email addresses, separated by comma's. Example: john@doe.com,jill@att.net</span>
+  <% form_for @form do |form| %>
+    <%= form.text_area :recipients, :value => @form.recipients.join(',') %>
+    <%= form.submit %>
+  <% end %>
+</div>
 <p class="">
   <%= link_to "Delete this form", @form, :confirm => 'Are you sure?', :method => :delete %>
 </p>
@@ -57,6 +64,16 @@
         indicator : "<img src='/images/indicator.gif'>",
         tooltip   : "Click to edit...",
         style  : "inherit"
+    });
+    // setup recipients form
+    $("#recipients form").ajaxForm({
+      beforeSubmit: function(){
+        $("#recipients form input[type=submit]").val('Saving...');
+      },
+      success: function(){
+        $("#recipients form input[type=submit]").val('Saved');
+        setTimeout(function(){$("#recipients form input[type=submit]").val('Saved changes');}, 2000)
+      }
     });
   });
 </script>

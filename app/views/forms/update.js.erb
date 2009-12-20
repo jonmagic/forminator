@@ -1,6 +1,7 @@
 <%=
     case params[:wants]
     when 'name' then h( @form.name )
+    when 'recipients' then h( @form.recipients )
     else ''
     end
 %>
