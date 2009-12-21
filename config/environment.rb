@@ -25,6 +25,7 @@ Rails::Initializer.run do |config|
   config.gem 'mongo_mapper', :version => '>= 0.6.1'
   config.gem 'clearance'
   config.gem 'formtastic'
+  config.gem "ambethia-recaptcha", :lib => "recaptcha/rails", :source => "http://gems.github.com"
   
   # clearance config
   DO_NOT_REPLY = "donotreply@forminator.heroku.com"

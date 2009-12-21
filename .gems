@@ -1,3 +1,4 @@
 mongo_mapper --version '>= 0.6.1'
 clearance --version '>= 0.8.3'
 formtastic --version '>= 0.2.4'
+ambethia-recaptcha --version '>= 0.2.2'
