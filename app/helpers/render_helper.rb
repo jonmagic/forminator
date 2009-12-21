@@ -15,7 +15,7 @@ module RenderHelper
       html << "<input type='text' id='questions_#{question.id}' name='questions[#{question.id}]' class='#{"required" if question.required}' />"
     when "paragraph"
       html << "<label class='standard'>#{question.text}<span class='small'>#{question.instructions}#{required}</span></label>"
-      html << "<text type='text' id='questions_#{question.id}' name='questions[#{question.id}]' class='#{"required" if question.required}'></text>"
+      html << "<textarea id='questions_#{question.id}' name='questions[#{question.id}]' class='#{"required" if question.required}'></textarea>"
     when "multiple_choice"
       html << "<label class='standard'>#{question.text}<span class='small'>#{question.instructions}#{required}</span></label>"
       question.options.each { |option| html << "<div class='option'><input type='radio' id='questions_#{question.id}' name='questions[#{question.id}][#{option}]' class='#{"required" if question.required}' /> <span>#{option}</span></div>" }

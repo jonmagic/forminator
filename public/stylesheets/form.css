@@ -83,6 +83,12 @@
   font-weight:bold;
   font-size:12px;
   }
+.pretty_form textarea {
+  margin-left:10px;
+  width:215px;
+  height:70px;
+  border:solid 1px #aacfe4;
+  }
 .pretty_form button{
   clear:both;
   margin-left:190px;
