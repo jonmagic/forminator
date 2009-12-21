@@ -9,7 +9,8 @@ class QuestionsController < ApplicationController
   
   def create
     @form = Form.find(params[:form_id], :creator_id => current_user.id)
-    @form.questions << Question.new(params[:question].merge(:ordinal => @form.questions.length+1))
+    @question = Question.new(params[:question].merge(:ordinal => @form.questions.length+1))
+    @form.questions << @question
     if @form.save
       render :partial => 'question', :response => 200
     else
