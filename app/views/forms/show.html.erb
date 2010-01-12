@@ -93,6 +93,7 @@
         },
         success: function(){
           form.find("input[type=submit]").val('Saved');
+          render();
           setTimeout(function(){form.find("input[type=submit]").val('Saved changes');}, 2000)
         }
       });
