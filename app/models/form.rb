@@ -6,6 +6,7 @@ class Form
   key :created_at, Time, :require => true
   key :updated_at, Time
   key :recipients, Array
+  key :submit_button, String
   key :message, Hash
   
   has_many :questions

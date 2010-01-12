@@ -15,7 +15,14 @@
     </li>
   <% end %>
 </ul>
-<div id="recipients" class="section">
+<div id="submit_button" class="section form">
+  <h3>Submit Button Text</h3>
+  <% form_for @form do |form| %>
+    <p><%= form.text_field :submit_button %></p>
+    <p><%= form.submit %></p>
+  <% end %>
+</div>
+<div id="recipients" class="section form">
   <h3>Recipients</h3>
   <p>Enter email addresses, separated by comma's.
     <br />Example: John@doe.com,Jill@att.net</p>
@@ -24,7 +31,7 @@
     <%= form.submit %>
   <% end %>
 </div>
-<div id="message" class="section">
+<div id="message" class="section form">
   <h3>Thank You Message</h3>
   <p>Enter a title and message for your users to see when they successfully fill out a form and submit it. You can also enter a url that they will automatically be forwarded to after a short pause.</p>
   <% form_for @form do |form| %>
@@ -77,25 +84,19 @@
         tooltip   : "Click to edit...",
         style  : "inherit"
     });
-    // setup recipients form
-    $("#recipients form").ajaxForm({
-      beforeSubmit: function(){
-        $("#recipients form input[type=submit]").val('Saving...');
-      },
-      success: function(){
-        $("#recipients form input[type=submit]").val('Saved');
-        setTimeout(function(){$("#recipients form input[type=submit]").val('Saved changes');}, 2000)
-      }
-    });
-    // setup message form
-    $("#message form").ajaxForm({
-      beforeSubmit: function(){
-        $("#message form input[type=submit]").val('Saving...');
-      },
-      success: function(){
-        $("#message form input[type=submit]").val('Saved');
-        setTimeout(function(){$("#message form input[type=submit]").val('Saved changes');}, 2000)
-      }
+    // setup submit_button form
+    $("div.form form").submit(function(){
+      var form = $(this);
+      form.ajaxSubmit({
+        beforeSubmit: function(){
+          form.find("input[type=submit]").val('Saving...');
+        },
+        success: function(){
+          form.find("input[type=submit]").val('Saved');
+          setTimeout(function(){form.find("input[type=submit]").val('Saved changes');}, 2000)
+        }
+      });
+      return false;
     });
   });
 </script>
