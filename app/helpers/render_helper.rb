@@ -18,10 +18,10 @@ module RenderHelper
       html << "<textarea id='questions_#{question.id}' name='questions[#{question.id}]' class='#{"required" if question.required}'></textarea>"
     when "multiple_choice"
       html << "<label class='standard'>#{question.text}<span class='small'>#{question.instructions}#{required}</span></label>"
-      question.options.each { |option| html << "<div class='option'><input type='radio' id='questions_#{question.id}' name='questions[#{question.id}][#{option}]' class='#{"required" if question.required}' /> <span>#{option}</span></div>" }
+      question.options.each { |option| html << "<div class='option'><input type='radio' id='questions_#{question.id}' name='questions[#{question.id}]' class='#{"required" if question.required}' value='#{option}' /> <span>#{option}</span></div>" }
     when "checkboxes"
       html << "<label class='standard'>#{question.text}<span class='small'>#{question.instructions}#{required}</span></label>"
-      question.options.each { |option| html << "<div class='option'><input type='checkbox' id='questions_#{question.id}' name='questions[#{question.id}][#{option}]' class='#{"required" if question.required}' /> <span>#{option}</span></div>" }
+      question.options.each { |option| html << "<div class='option'><input type='checkbox' id='questions_#{question.id}' name='questions[#{question.id}]' class='#{"required" if question.required}' value='#{option}' /> <span>#{option}</span></div>" }
     when "list"
       html << "<label>#{question.text}<span class='small'>#{question.instructions}#{required}</span></label>"
       html << "<select id='questions_#{question.id}' name='questions[#{question.id}]' class='#{"required" if question.required}'>"
