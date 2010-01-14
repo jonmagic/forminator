@@ -12,6 +12,15 @@ class FormsController < ApplicationController
     end
   end
   
+  def reorder
+    @form = Form.find(params[:id])
+    if @form.reorder(params[:question])
+      render :nothing => true, :response => 200
+    else
+      render :nothing => true, :response => 500
+    end
+  end
+  
   def new
     @form = Form.new
     render :layout => false
@@ -19,7 +28,7 @@ class FormsController < ApplicationController
   
   def create
     @form = Form.new(params[:form])
-    @form.questions << Question.new(:text => @form.name, :type => 'title', :ordinal => 1)
+    @form.questions << Question.new(:text => @form.name, :type => 'title')
     if @form.save
       render :partial => 'form', :response => 200
     else

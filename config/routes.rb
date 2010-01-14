@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+  map.reorder '/forms/:id/reorder', :controller => 'forms', :action => 'reorder', :conditions => {:method => :put}
   map.resources :forms do |form|
     form.resources :questions
   end

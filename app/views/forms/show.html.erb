@@ -6,12 +6,13 @@
 </ul>
 <div style="clear:both;padding-bottom:1em"></div>
 <ul id="questions" class="questions jm-list ui-widget ui-helper-clearfix">
-  <% @form.questions.sort_by(&:ordinal).each do |question| %>
+  <% @form.questions.each do |question| %>
     <li id="question_<%= question.id %>">
       <a href="javascript:void(0)" class="question ui-state-default ui-corner-all" data-question-id="<%= question.id %>">
         <%= question_icon_helper(question) %>
         <%= question.text %>
       </a>
+      <span class="handle ui-icon ui-icon-arrowthick-2-n-s"></span>
     </li>
   <% end %>
 </ul>
@@ -53,6 +54,19 @@
     $('#rendered').load('/render/<%= @form.id %>');
   }
   $(function(){
+    // reorder questions
+    $("ul#questions").sortable({
+      containment: 'parent',
+      items: 'li',
+      handle: 'span.handle',
+      stop: function(){
+        $.ajax({
+          type: 'put',
+          data: $("ul#questions").sortable('serialize'),
+          url: '/forms/<%= @form.id %>/reorder'
+        });
+      }
+    });
     // open new question dialog
     $('#new_question').click(function(){
       $('#dialog').load('/forms/<%= @form.id %>/questions/new', function(){
@@ -65,14 +79,7 @@
         $('#dialog').dialog('open');
       });
     });
-    // slide down question details
-    // $("a.question").mouseover(function(){$(this).next('.question_details').slideDown("medium");});
-    // $("a.question").mouseout(function(){$(this).next('.question_details').slideUp("fast");});
-
-    // render the form
-    render();
-    
-    // edit form properties
+        // edit form properties
     $('#form_name').editable("<%= form_path(@form) %>", {
         name: 'form[name]',
         method : "PUT",
@@ -99,5 +106,7 @@
       });
       return false;
     });
+    // render the form
+    render();
   });
 </script>

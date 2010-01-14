@@ -6,7 +6,6 @@ class Question
   key :type, String, :required => true      # [["Title","title"],["SubTitle","subtitle"],["Divider","divider"],["Text Field","text"],["Text Box","paragraph"],["Multiple Choice","multiple_choice"],["Checkboxes","checkboxes"],["Drop Down List","list"],["If Then","ifthen"]]
   key :options, Array                       # ["option1","option2","hahaha"]
   key :required, Boolean, :default => false
-  key :ordinal, Integer, :required => true  # lets get some order here people
   
   # if type == ifthen && ifthen.if == answer then show second field
   

@@ -41,4 +41,12 @@ class Form
     self.recipients = self.recipients.to_s.split(',')
   end
   
+  def reorder(question_ids)
+    valid_question_ids = questions.collect(&:id)
+    question_ids = question_ids.map { |id| ObjectId.to_mongo(id) }
+    question_ids.delete_if { |id| !valid_question_ids.include?(id) }
+    questions.sort! { |a, b| question_ids.index(a.id) <=> question_ids.index(b.id) }
+    save
+  end
+  
 end
