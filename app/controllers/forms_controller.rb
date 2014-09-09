@@ -28,6 +28,7 @@ class FormsController < ApplicationController
   
   def create
     @form = Form.new(params[:form])
+    @form.creator_id = current_user.id
     @form.questions << Question.new(:text => @form.name, :type => 'title')
     if @form.save
       render :partial => 'form', :response => 200

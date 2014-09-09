@@ -3,6 +3,6 @@ class RenderController < ApplicationController
   layout nil
 
   def show
-    @form = Form.find(params[:id], :creator_id => current_user.id)
+    @form = Form.first(:id => params[:id], :creator_id => current_user.id)
   end
 end

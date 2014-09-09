@@ -9,7 +9,7 @@ class Form
   key :submit_button, String
   key :message, Hash
   
-  has_many :questions
+  many :questions
   
   validate :prevent_duplicates
   def prevent_duplicates

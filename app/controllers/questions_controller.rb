@@ -8,7 +8,7 @@ class QuestionsController < ApplicationController
   end
   
   def create
-    @form = Form.find(params[:form_id], :creator_id => current_user.id)
+    @form = Form.first(:id => params[:form_id], :creator_id => current_user.id)
     @question = Question.new(params[:question])
     @form.questions << @question
     if @form.save
@@ -19,12 +19,12 @@ class QuestionsController < ApplicationController
   end
   
   def edit
-    @form = Form.find(params[:form_id], :creator_id => current_user.id)
+    @form = Form.first(:id => params[:form_id], :creator_id => current_user.id)
     @question = @form.questions.find(params[:id])
   end
   
   def update
-    @form = Form.find(params[:form_id], :creator_id => current_user.id)
+    @form = Form.first(:id => params[:form_id], :creator_id => current_user.id)
     @question = @form.questions.find(params[:id])
     if @question.update_attributes(params[:question])
       render :partial => 'question', :response => 200
@@ -34,7 +34,7 @@ class QuestionsController < ApplicationController
   end
   
   def destroy
-    @form = Form.find(params[:form_id], :creator_id => current_user.id)
+    @form = Form.first(:id => params[:form_id], :creator_id => current_user.id)
     @form.questions.delete_if {|q| q.id.to_s == params[:id] }
     if @form.save
       render :nothing => true, :response => 200

@@ -63,7 +63,10 @@
         $.ajax({
           type: 'put',
           data: $("ul#questions").sortable('serialize'),
-          url: '/forms/<%= @form.id %>/reorder'
+          url: '/forms/<%= @form.id %>/reorder',
+          success: function(){
+            render();
+          }
         });
       }
     });
