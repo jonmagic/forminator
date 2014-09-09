@@ -3,6 +3,6 @@ class ReceiverController < ApplicationController
   def update
     @form = Form.find(params[:id])
     flash[:notice] = "Form was sent successfully" if FormMailer.deliver_form(@form, params[:questions])
-    redirect_to form_message(@form)
+    redirect_to form_message_path(@form)
   end
 end

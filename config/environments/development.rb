@@ -15,7 +15,7 @@ config.action_controller.perform_caching             = false
 
 
 # clearance config options
-HOST = "localhost"
+HOST = "localhost:3000"
 
 # mongomapper connection
 MongoMapper.connection = Mongo::Connection.new('127.0.0.1', 27017, :auto_reconnect => true, :logger => Rails.logger)

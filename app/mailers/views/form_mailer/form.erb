@@ -1,5 +1,5 @@
-<% @form.questions.each do |question| %><% if ["title","subtitle","divider"].include?(question.type) %><%= question.type.upcase %> <%= question.text %>
-<% else %>
+<% @form.questions.each do |question| %>
+<% if ["title","subtitle","divider"].include?(question.type) %><%= question.type.upcase %> <%= question.text %><% else %>
 Q: <%= question.text %>
 A: <%= @questions[question.id].inspect %>
 <% end %><% end %>

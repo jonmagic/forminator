@@ -44,6 +44,6 @@ class QuestionsController < ApplicationController
   
   private
     def types
-      @types = [["Title","title"],["SubTitle","subtitle"],["Divider","divider"],["Short Answer","text"],["Long Answer","paragraph"],["Multiple Choice","multiple_choice"],["Checkboxes","checkboxes"],["Drop Down List","list"],["If Then","ifthen"]]      
+      @types = [["Title","title"],["SubTitle","subtitle"],["Divider","divider"],["Short Answer","text"],["Long Answer","paragraph"],["Multiple Choice","multiple_choice"],["Checkboxes","checkboxes"],["Drop Down List","list"]]
     end
 end
