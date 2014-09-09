@@ -6,6 +6,7 @@ class Form
   key :created_at, Time, :require => true
   key :updated_at, Time
   key :recipients, Array
+  key :message, Hash
   
   has_many :questions
   
@@ -26,6 +27,12 @@ class Form
   end
   def set_updated_at
     self.updated_at = Time.now
+  end
+  
+  before_create :set_default_message
+  def set_default_message
+    self.message['title'] = "Thank You"
+    self.message['body']  = "Thank you for taking the time to fill out our form. Have a great day!"
   end
   
   before_update :recipients_to_array

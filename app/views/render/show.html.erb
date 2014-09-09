@@ -1,9 +1,23 @@
-<form class="pretty_form" action="/receiver/<%= @form.id %>" method="post">
-  <input type="hidden" name="_method" value="put" />
-  <% @form.questions.each do |question| %>
-    <%= question_to_html(question) %>
+<h3>Preview</h3>
+<div id="form"><form class="pretty_form" action="/receiver/<%= @form.id %>" method="post">
+    <input type="hidden" name="_method" value="put" />
+    <% @form.questions.each do |question| %>
+      <%= question_to_html(question) %>
+      <div class="spacer"></div>
+    <% end %>
+    <button type="submit">Sign-up</button>
     <div class="spacer"></div>
-  <% end %>
-  <button type="submit">Sign-up</button>
-  <div class="spacer"></div>
-</form>
+  </form>
+</div>
+<br />
+<h3>Code</h3>
+<textarea id="for_copy"></textarea>
+
+<script>
+  $(function(){
+    $.get('/stylesheets/form.css', function(data){
+      var stylesheet = "<style>\n"+data+"\n</style>"
+      $("textarea#for_copy").val($("div#rendered > div#form").html()+stylesheet);
+    });
+  });
+</script>

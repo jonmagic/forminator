@@ -15,14 +15,26 @@
     </li>
   <% end %>
 </ul>
-<div id="recipients">
+<div id="recipients" class="section">
   <h3>Recipients</h3>
-  <span>Enter email addresses, separated by comma's. Example: john@doe.com,jill@att.net</span>
+  <p>Enter email addresses, separated by comma's.
+    <br />Example: John@doe.com,Jill@att.net</p>
   <% form_for @form do |form| %>
     <%= form.text_area :recipients, :value => @form.recipients.join(',') %>
     <%= form.submit %>
   <% end %>
 </div>
+<div id="message" class="section">
+  <h3>Thank You Message</h3>
+  <p>Enter a title and message for your users to see when they successfully fill out a form and submit it. You can also enter a url that they will automatically be forwarded to after a short pause.</p>
+  <% form_for @form do |form| %>
+    <p>Title: <%= text_field_tag "form[message][title]", @form.message['title'] %></p>
+    <%= text_area_tag "form[message][body]", @form.message['body'] %>
+    <p>Return To Url: <%= text_field_tag "form[message][return_to_url]", @form.message['return_to_url'] %></p>
+    <%= form.submit %>
+  <% end %>
+</div>
+<hr />
 <p class="">
   <%= link_to "Delete this form", @form, :confirm => 'Are you sure?', :method => :delete %>
 </p>
@@ -73,6 +85,16 @@
       success: function(){
         $("#recipients form input[type=submit]").val('Saved');
         setTimeout(function(){$("#recipients form input[type=submit]").val('Saved changes');}, 2000)
+      }
+    });
+    // setup message form
+    $("#message form").ajaxForm({
+      beforeSubmit: function(){
+        $("#message form input[type=submit]").val('Saving...');
+      },
+      success: function(){
+        $("#message form input[type=submit]").val('Saved');
+        setTimeout(function(){$("#message form input[type=submit]").val('Saved changes');}, 2000)
       }
     });
   });
