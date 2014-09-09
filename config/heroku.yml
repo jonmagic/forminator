@@ -1,0 +1,5 @@
+apps:
+  # shorthand: heroku app
+  production: forminator
+  staging: forminator-staging
+  demo: forminator-demo
