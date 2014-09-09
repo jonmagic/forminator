@@ -1,5 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :forms
+  map.resources :forms do |form|
+    form.resources :questions
+  end
+  map.resources :render
   
   map.root :controller => 'forms'
   

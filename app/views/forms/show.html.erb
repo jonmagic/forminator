@@ -1,13 +1,25 @@
 <h2><%=h @form.name %></h2>
-
-<ul class="questions">
-  <% @form.questions.each do |question| %>
-    <li class="questions">
-      <a href="javascript:void(0)">
-        <span class="question_text"><%= question.text %></span>
+<ul class="jm-buttons ui-widget ui-helper-clearfix">
+  <li class="ui-state-default ui-corner-all" id="new_question">
+    <span class="ui-icon ui-icon-plus"></span>
+  </li>
+</ul>
+<div style="clear:both;padding-bottom:1em"></div>
+<ul id="questions" class="questions jm-list ui-widget ui-helper-clearfix">
+  <% @form.questions.sort_by(&:ordinal).each do |question| %>
+    <li>
+      <a href="javascript:void(0)" class="question ui-state-default ui-corner-all" data-question-id="<%= question.id %>">
+        <span class="ui-icon ui-icon-help float-left"></span>
+        <%= question.text %>
       </a>
-      <span class="question_type">Type: <%= question.type %></span>
-      <span class="question_options">Options: <%= options_helper(question) %></span>
+      <div class="question_details hide">
+        <p><%= question.type %></p>
+        <ul>
+          <% question.options.each do |option| %>
+            <li><%= option %></li>
+          <% end %>
+        </ul>
+      </div>
     </li>
   <% end %>
 </ul>
@@ -17,3 +29,31 @@
   <%= link_to "Delete this form", @form, :confirm => 'Are you sure?', :method => :delete %> |
   <%= link_to "View all forms", forms_path %>
 </p>
+
+<div id="dialog"></div>
+
+<script>
+  function render(){
+    $('#rendered').load('/render/<%= @form.id %>');
+  }
+  $(function(){
+    // open new question dialog
+    $('#new_question').click(function(){
+      $('#dialog').load('/forms/<%= @form.id %>/questions/new', function(){
+        $('#dialog').dialog('open');
+      });
+    });
+    $('.question').live('click', function(){
+      var question = $(this);
+      $('#dialog').load('/forms/<%= @form.id %>/questions/'+question.attr("data-question-id")+'/edit', function(){
+        $('#dialog').dialog('open');
+      });
+    });
+    // slide down question details
+    // $("a.question").mouseover(function(){$(this).next('.question_details').slideDown("medium");});
+    // $("a.question").mouseout(function(){$(this).next('.question_details').slideUp("fast");});
+
+    // render the form
+    render();
+  });
+</script>

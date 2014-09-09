@@ -10,20 +10,16 @@ class FormsController < ApplicationController
   
   def new
     @form = Form.new
+    render :layout => false
   end
   
   def create
     @form = Form.new(params[:form])
     if @form.save
-      flash[:notice] = "The form #{@form.name} was created successfully."
-      redirect_to @form
+      render :partial => 'form', :response => 200
     else
-      render :action => 'new'
+      render :nothing => true, :response => 500
     end
-  end
-  
-  def edit
-    @form = Form.first(:id => params[:id], :creator_id => current_user.id)
   end
   
   def update

@@ -1,9 +1,29 @@
 <h2>My Forms</h2>
-
-<ul class="forms">
+<ul class="jm-buttons ui-widget ui-helper-clearfix">
+  <li class="ui-state-default ui-corner-all" id="new_form" title="New Form">
+    <span class="ui-icon ui-icon-plus"></span>
+  </li>
+</ul>
+<div style="clear:both;padding-bottom:1em"></div>
+<ul class="forms jm-list ui-widget ui-helper-clearfix" id="forms">
   <% for form in @forms %>
-    <li><%= link_to h(form.name), form %></li>
+    <li>
+      <a href="<%= form_path(form) %>" class="ui-state-default ui-corner-all">
+        <span class="ui-icon ui-icon-carat-1-e float-left"></span>
+        <%= form.name %>
+      </a>
+    </li>
   <% end %>
 </ul>
 
-<p><%= link_to "New Form", new_form_path %></p>
+<div id="dialog"></div>
+
+<script>
+  $(function(){
+    // open new form dialog
+    $("#new_form").click(function(){
+      $('#dialog').load('/forms/new');
+      $('#dialog').dialog('open');
+    })
+  });
+</script>

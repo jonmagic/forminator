@@ -1,9 +1,29 @@
-<div class="span-12">
-  <h2>New Form</h2>
+<% semantic_form_for @form do |form| %>
+  <%= form.error_messages %>
+  <% form.inputs do %>
+    <%= form.input :name %>
+  <% end %>
+<% end %>
 
-  <%= render :partial => 'form' %>
-
-  <p><%= link_to "Back to List", forms_path %></p>
-</div>
-<div class="span-12 last">
-</div>
+<script>
+  $(function(){
+    // focus on question
+    $("#form_name").focus();
+    // new question
+    $('#dialog').dialog('option', 'title', 'New Form');
+    $('#dialog').dialog('option', 'buttons', {
+      "Save": function(){
+        $("#dialog form").ajaxSubmit({
+          success: function(data, status){
+            $("#forms").append(data);
+            $("#dialog").dialog('close');
+          }
+        });
+      },
+      "Cancel": function(){
+        $("#dialog form").clearForm();
+        $("#dialog").dialog('close');
+      }
+    });
+  });
+</script>

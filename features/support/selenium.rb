@@ -15,6 +15,10 @@ DatabaseCleaner.strategy = :truncation
 
 Before do
   DatabaseCleaner.start
+  Dir[Rails.root + 'app/models/**/*.rb'].each do |model_path|
+    klass = File.basename(model_path, '.rb').classify.constantize
+    klass.collection.remove if klass.respond_to?(:collection)
+  end
 end
 
 After do

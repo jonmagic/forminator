@@ -1,0 +1,109 @@
+<form class="pretty_form" action="/render">
+  <% @form.questions.each do |question| %>
+    <%= question_to_html(question) %>
+    <div class="spacer"></div>
+  <% end %>
+  <button type="submit">Sign-up</button>
+  <div class="spacer"></div>
+</form>
+
+<style>
+  .pretty_form p, .pretty_form h1, .pretty_form form, .pretty_form button {
+    border:0;
+    margin:0;
+    padding:0;
+    }
+  .pretty_form .spacer {
+    clear:both;
+    height:1px;
+    }
+  .pretty_form {
+    margin:0 auto;
+    width:438px;
+    padding:14px;
+    }
+  .pretty_form {
+    border:solid 2px #b7ddf2;
+    background:#ebf4fb;
+    }
+  .pretty_form h1 {
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:8px;
+    }
+  .pretty_form h2{
+    font-size:16px;
+    color:#666666;
+    margin-bottom:20px;
+    border-bottom:solid 1px #b7ddf2;
+    padding-bottom:10px;
+    }
+  .pretty_form p{
+    font-size:11px;
+    color:#666666;
+    margin-bottom:20px;
+    border-bottom:solid 1px #b7ddf2;
+    padding-bottom:10px;
+    }
+  .pretty_form label{
+    display:block;
+    font-weight:bold;
+    text-align:right;
+    width:180px;
+    float:left;
+    font-size:14px;
+    }
+  .pretty_form .small{
+    color:#666666;
+    display:block;
+    font-size:12px;
+    font-weight:normal;
+    text-align:right;
+    padding:0;
+    margin-top:-5px;
+    width:180px;
+    }
+  .pretty_form input {
+    float:left;
+    font-size:15px;
+    padding:4px 2px;
+    }
+  .pretty_form input[type=text]{
+    border:solid 1px #aacfe4;
+    width:230px;
+    height:21px;
+    margin:2px 0 20px 10px;
+    }
+  .pretty_form input[type="radio"]{
+    font-size:12px;
+    height:16px;
+    }
+  .pretty_form select {
+    font-size:12px;
+    margin:8px 0 20px 12px;
+    }
+  .pretty_form div.option {
+    margin-left:190px;
+    margin-bottom:5px;
+    display:block;
+    }
+  .pretty_form div.option span {
+    vertical-align:-4px;
+    font-weight:bold;
+    font-size:12px;
+    }
+  .pretty_form button{
+    clear:both;
+    margin-left:190px;
+    width:125px;
+    height:31px;
+    background:#666666 url(img/button.png) no-repeat;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    text-align:center;
+    line-height:31px;
+    color:#FFFFFF;
+    font-size:11px;
+    font-weight:bold;
+    }
+</style>

@@ -1,0 +1,72 @@
+<% semantic_form_for([:form, @question]) do |form| %>
+  <%= form.error_messages %>
+  <% form.inputs do %>
+    <%= form.input :text %>
+    <%= form.input :instructions %>
+    <%= form.input :type, :collection => @types, :include_blank => false %>
+  <% end %>
+<% end %>
+
+<script>
+  $(function(){
+    // focus on question
+    $("#question_text").focus();
+    // new question
+    $('#dialog').dialog('option', 'title', 'New Question');
+    $('#dialog').dialog('option', 'buttons', {
+      "Save": function(){
+        $("#dialog form").ajaxSubmit({
+          beforeSubmit: function(data, jqForm, options){
+            $('fieldset.inputs').each(function(){
+              if($(this).val()==""){
+                $(this).parent().remove();
+              }
+            });
+          },
+          success: function(data, status){
+            $("#questions").append(data);
+            $("#dialog").dialog('close');
+            render();
+          },
+          clearForm: true
+        });
+      },
+      "Cancel": function(){
+        $("#dialog form").clearForm();
+        $("#dialog").dialog('close');
+      }
+    });
+    // form stuff
+    $("#question_type").change(function(){
+      if (_.include(["multiple_choice","checkboxes","list","ifthen"], $("#question_type").val())) {
+        $('li.new').remove();
+        $('#question_text_input').show();
+        $('#question_instructions_input').show();
+        $('fieldset.inputs ol').append('<li class="new"><label for="question_option">Option</label><input name="question[options][]" type="text" class="float-left" /><span class="ui-icon ui-icon-plus float-left"></span></li>');
+        $('fieldset.inputs ol li input.first').focus();
+      }else if(_.include(["text","paragraph"], $("#question_type").val())){
+        $('#question_text_input').show();
+        $('#question_instructions_input').show();
+        $('ul.options li').remove();
+      }else if(_.include(["title","subtitle"], $("#question_type").val())){
+        $('#question_text_input').show();
+        $('#question_instructions_input').hide();
+        $('li.new').remove();
+      }else if(_.include(["divider"], $("#question_type").val())){
+        $('#question_text_input').hide();
+        $('#question_instructions_input').hide();
+        $('li.new').remove();
+      }else{
+        $('#question_instructions_input').show();
+        $('li.new').remove();
+      }
+    });
+    $('span.ui-icon-plus').live("click", function(){
+      $(this).parent().after('<li class="new"><label for="question_option">Option</label><input name="question[options][]" type="text" class="float-left" /><span class="ui-icon ui-icon-plus float-left"></span><span class="ui-icon ui-icon-minus float-left"></span></li>');
+    });
+    $('span.ui-icon-minus').live("click", function(){
+      $(this).parent().remove();
+    });
+    if(_.include(["title","subtitle"], $("#question_type").val())){$('#question_instructions_input').hide();}
+  });
+</script>
